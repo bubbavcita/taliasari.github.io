@@ -1,459 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 220px;
-        width: 220px;
-      }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-      a[href^="http://maps.google.com/maps"]{display:none !important}
-      a[href^="https://maps.google.com/maps"]{display:none !important}
+    <title>Talia's Backoffice</title>
 
-      .gmnoprint a, .gmnoprint span, .gm-style-cc {
-          display:none;
-      }
-      .gmnoprint div {
-          background:none !important;
-      }
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-      #container{
-        margin-left: 100px;
-        margin-top: 100px;
-        max-width: 200px;
-      }
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-      #title {
-        text-align: center;
-      }
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
-    </style>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <link href="map.css" rel="stylesheet">
+
   </head>
+
   <body>
-    <div id="container">
-      <div id="title"><h3>Talia's Map</h3></div>
-      <div id="map"></div>
-      <div id="fields">
-        <ul id="values">
-        </ul>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Where It Began</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Maps</a></li>
+            <li class="hidden"><a href="#about">About</a></li>
+            <li class="hidden"><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-    </div>
-    <script>
+    </nav>
 
-      function URLToArray(url) {
-          var request = {};
-          var pairs = url.substring(url.indexOf('?') + 1).split('&');
-          for (var i = 0; i < pairs.length; i++) {
-              if(!pairs[i])
-                  continue;
-              var pair = pairs[i].split('=');
-              request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
-           }
-           return request;
-      }
+    <div class="container">
 
-      function initMap() {
-        var styleArray = [
-           {
-              "featureType":"all",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"administrative",
-              "elementType":"all",
-              "stylers":[
-                 {
-                    "hue":"#ff0000"
-                 },
-                 {
-                    "lightness":100
-                 },
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"administrative",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"administrative",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"landscape",
-              "elementType":"all",
-              "stylers":[
-                 {
-                    "hue":"#ffffff"
-                 },
-                 {
-                    "saturation":-100
-                 },
-                 {
-                    "lightness":100
-                 },
-                 {
-                    "visibility":"on"
-                 }
-              ]
-           },
-           {
-              "featureType":"landscape",
-              "elementType":"geometry.fill",
-              "stylers":[
-                 {
-                    "visibility":"on"
-                 },
-                 {
-                    "color":"#f7f7f7"
-                 }
-              ]
-           },
-           {
-              "featureType":"landscape",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"landscape",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"landscape.natural",
-              "elementType":"geometry.fill",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 },
-                 {
-                    "color":"#ff0000"
-                 }
-              ]
-           },
-           {
-              "featureType":"poi",
-              "elementType":"all",
-              "stylers":[
-                 {
-                    "hue":"#ffffff"
-                 },
-                 {
-                    "saturation":-100
-                 },
-                 {
-                    "lightness":100
-                 },
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"poi",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"poi.park",
-              "elementType":"geometry.fill",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 },
-                 {
-                    "color":"#e0e0e0"
-                 }
-              ]
-           },
-           {
-              "featureType":"road",
-              "elementType":"geometry",
-              "stylers":[
-                 {
-                    "hue":"#000000"
-                 },
-                 {
-                    "saturation":-100
-                 },
-                 {
-                    "lightness":-100
-                 },
-                 {
-                    "visibility":"simplified"
-                 }
-              ]
-           },
-           {
-              "featureType":"road",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "hue":"#ff0000"
-                 },
-                 {
-                    "saturation":-100
-                 },
-                 {
-                    "lightness":100
-                 },
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"road.highway",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"road.highway.controlled_access",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"simplified"
-                 }
-              ]
-           },
-           {
-              "featureType":"road.arterial",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"simplified"
-                 }
-              ]
-           },
-           {
-              "featureType":"road.local",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"simplified"
-                 },
-                 {
-                    "weight":"0.50"
-                 },
-                 {
-                    "lightness":"0"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit",
-              "elementType":"geometry",
-              "stylers":[
-                 {
-                    "hue":"#000000"
-                 },
-                 {
-                    "lightness":-100
-                 },
-                 {
-                    "visibility":"on"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit",
-              "elementType":"geometry.fill",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "hue":"#ff0000"
-                 },
-                 {
-                    "lightness":100
-                 },
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit",
-              "elementType":"labels.text",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit.station",
-              "elementType":"geometry.fill",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit.station",
-              "elementType":"geometry.stroke",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"transit.station.rail",
-              "elementType":"all",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           },
-           {
-              "featureType":"water",
-              "elementType":"all",
-              "stylers":[
-                 {
-                    "hue":"#00afff"
-                 },
-                 {
-                    "saturation":-100
-                 },
-                 {
-                    "lightness":100
-                 },
-                 {
-                    "visibility":"simplified"
-                 }
-              ]
-           },
-           {
-              "featureType":"water",
-              "elementType":"geometry.fill",
-              "stylers":[
-                 {
-                    "visibility":"on"
-                 },
-                 {
-                    "color":"#68c5d5"
-                 }
-              ]
-           },
-           {
-              "featureType":"water",
-              "elementType":"labels",
-              "stylers":[
-                 {
-                    "visibility":"off"
-                 }
-              ]
-           }
-        ]
+      <div class="starter-template">
+        <h1>Talia's Maps</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <div id="map-container">
+          <div id="map"></div>
+        </div>
+        <div id="fields">
+          <ul id="values">
+          </ul>
+        </div>
 
-      var params = URLToArray(window.location.search);
-      console.log(params);
+      </div>
 
-      myCenterUrl = undefined;
+    </div><!-- /.container -->
 
-      if (("lat" in params) && ("lng" in params) && ("zoom" in params)) {
-        myCenter = {
-          lat: Number(params["lat"]),
-          lng: Number(params["lng"]),
-          zoom: Number(params["zoom"])
-        }
-      } else {
-        myCenter = {
-          lat: 32.0663195,
-          lng: 34.771751,
-          zoom:15
-        }
-      }
 
-      var ignore_params = {
-        "lat": 1,
-        "lng": 1,
-        "zoom": 1
-      }
-
-      for (var key in params) {
-        if (params.hasOwnProperty(key) && (!(key in ignore_params))) {
-          var ul = document.getElementById("fields");
-          var li = document.createElement("li");
-          li.appendChild(document.createTextNode(key + ":" + params[key]));
-          ul.appendChild(li);
-        }
-      }
-
-      console.log('myCenter: ', myCenter)
-
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: myCenter,
-        styles: styleArray,
-        scrollwheel: false,
-        zoom: myCenter.zoom,
-        disableDefaultUI: true,
-        minZoom: 13,
-        zoomControl: false,
-        maxZoom: 17
-      });
-    }
-
-    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="map.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNrBJVFAzWl519QqfMhxRonRxdgeeU85Y&callback=initMap"
     async defer></script>
   </body>
