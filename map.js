@@ -270,7 +270,7 @@ function initMap() {
     if (params.hasOwnProperty(key) && (!(key in ignore_params))) {
       var ul = document.getElementById("fields");
       var li = document.createElement("li");
-      li.appendChild(document.createTextNode(key + ":" + params[key]));
+      li.appendChild(document.createTextNode(key + ": " + params[key]));
       ul.appendChild(li);
     }
   }
