@@ -5,7 +5,7 @@ function URLToArray(url) {
         if(!pairs[i])
             continue;
         var pair = pairs[i].split('=');
-        request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+        request[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]).replace( /\+/g, ' ' );
      }
      return request;
 }
