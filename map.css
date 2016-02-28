@@ -16,8 +16,8 @@ body {
 }
 */
 #map {
-  width: 220px; 
-  height: 220px; 
+  width: 350px; 
+  height: 350px; 
   margin:0px auto; 
   display:inline-block;
 }
