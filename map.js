@@ -35,7 +35,8 @@ function initMap() {
   var ignore_params = {
     "lat": 1,
     "lng": 1,
-    "zoom": 1
+    "zoom": 1,
+    "size": 1
   }
 
   for (var key in params) {
@@ -47,7 +48,11 @@ function initMap() {
     }
   }
 
-  console.log('myCenter: ', myCenter)
+
+  if (params["size"]) {
+    document.getElementById('map').style.height=params["size"]+"px";
+    document.getElementById('map').style.width=params["size"]+"px";
+  }
 
   map = new google.maps.Map(document.getElementById('map'), {
     center: myCenter,
