@@ -60,8 +60,8 @@ function initMap() {
     scrollwheel: false,
     zoom: myCenter.zoom,
     disableDefaultUI: true,
-    minZoom: 13,
-    zoomControl: false,
-    maxZoom: 18
+//    minZoom: 13,
+    zoomControl: false
+//    maxZoom: 18
   });
 }
