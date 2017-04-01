@@ -66,7 +66,8 @@ function initMap() {
   });
 
   map.on('load', function (e) {
-	map.resize();
+    map.resize();
+    map.scrollZoom.disable();
   });    
     
 //    map = new google.maps.Map(document.getElementById('map'), {
