@@ -22,7 +22,7 @@ body {
   display:inline-block;
 }
 
-/* .mapboxgl-ctrl-logo{
+.mapboxgl-ctrl-logo{
     display: none !important;
 }
 
@@ -33,7 +33,7 @@ body {
 .mapboxgl-ctrl-compass {
   display: none !important;
 }
- */
+
 a[href^="http://maps.google.com/maps"]{display:none !important}
 a[href^="https://maps.google.com/maps"]{display:none !important}
 
