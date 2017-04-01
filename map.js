@@ -54,6 +54,9 @@ function initMap() {
     document.getElementById('map').style.width=params["size"]+"px";
   }
 
+    
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGFsaWFzYXJpZGV2IiwiYSI6ImNqMHoycjUxaTAyNHAyd3BlbW1hamprcW8ifQ.17P_6A1bBDU_XTj3kKMi0w';
+  
   map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v9',
