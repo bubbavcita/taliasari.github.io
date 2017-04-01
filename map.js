@@ -55,8 +55,8 @@ function initMap() {
   }
 
     
-  mapboxgl.accessToken = 'pk.eyJ1IjoidGFsaWFzYXJpZGV2IiwiYSI6ImNqMHoycjUxaTAyNHAyd3BlbW1hamprcW8ifQ.17P_6A1bBDU_XTj3kKMi0w';
-  
+//   mapboxgl.accessToken = 'pk.eyJ1IjoidGFsaWFzYXJpZGV2IiwiYSI6ImNqMHoycjUxaTAyNHAyd3BlbW1hamprcW8ifQ.17P_6A1bBDU_XTj3kKMi0w';
+  mapboxgl.accessToken = 'pk.eyJ1IjoidGFsaWFzYXJpIiwiYSI6ImY4MzcwNjAyMDRjZGUyOTZmMjM0OGFlYmRhMmI4YjdjIn0.qfgdEmate5DzRnG1vZHOCw';  
   map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v9',
