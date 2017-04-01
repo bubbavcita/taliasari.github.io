@@ -54,14 +54,22 @@ function initMap() {
     document.getElementById('map').style.width=params["size"]+"px";
   }
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: myCenter,
-    styles: styleArray,
-    scrollwheel: false,
-    zoom: myCenter.zoom,
-    disableDefaultUI: true,
-//    minZoom: 13,
-    zoomControl: false
-//    maxZoom: 18
+  map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v9',
+  attributionControl: false,
+  zoom: myCenter.zoom,
+  center: [myCenter.lng, myCenter.lat]
   });
+
+//    map = new google.maps.Map(document.getElementById('map'), {
+//     center: myCenter,
+//     styles: styleArray,
+//     scrollwheel: false,
+//     zoom: myCenter.zoom,
+//     disableDefaultUI: true,
+// //    minZoom: 13,
+//     zoomControl: false
+// //    maxZoom: 18
+//   });
 }
