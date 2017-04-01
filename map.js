@@ -65,6 +65,10 @@ function initMap() {
   center: [myCenter.lng, myCenter.lat]
   });
 
+  map.on('load', function (e) {
+	map.resize();
+  });    
+    
 //    map = new google.maps.Map(document.getElementById('map'), {
 //     center: myCenter,
 //     styles: styleArray,
