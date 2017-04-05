@@ -45,6 +45,9 @@ function initMap() {
       var li = document.createElement("li");
       li.appendChild(document.createTextNode(key + ": " + params[key]));
       ul.appendChild(li);
+      if (key == 'map_id') {
+        document.getElementById('map_id').innerHTML=params[key];   
+      }
     }
   }
 
