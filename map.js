@@ -80,7 +80,7 @@ function initMap() {
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [Number(params['pin_lng']),Number(params['pin_lat']]
+                        "coordinates": [Number(params['pin_lng']),Number(params['pin_lat'])]
                     }
                 }]
             }
