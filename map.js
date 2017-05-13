@@ -92,7 +92,7 @@ function initMap() {
             "source": "point",
             "paint": {
                 "circle-radius": 10,
-                "circle-color": "#3887be"
+                "circle-color": "#c1272d"
             }
         });
     }
