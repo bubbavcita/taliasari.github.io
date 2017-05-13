@@ -36,7 +36,9 @@ function initMap() {
     "lat": 1,
     "lng": 1,
     "zoom": 1,
-    "size": 1
+    "size": 1,
+    "pin_lng": 1,
+    "pin_lat": 1
   }
 
   for (var key in params) {
@@ -57,10 +59,6 @@ function initMap() {
     document.getElementById('map').style.width=params["size"]+"px";
   }
 
-    
-//   mapboxgl.accessToken = 'pk.eyJ1IjoidGFsaWFzYXJpZGV2IiwiYSI6ImNqMHoycjUxaTAyNHAyd3BlbW1hamprcW8ifQ.17P_6A1bBDU_XTj3kKMi0w';
-//       style: 'mapbox://styles/mapbox/streets-v9',
-
   mapboxgl.accessToken = 'pk.eyJ1IjoidGFsaWFzYXJpIiwiYSI6ImY4MzcwNjAyMDRjZGUyOTZmMjM0OGFlYmRhMmI4YjdjIn0.qfgdEmate5DzRnG1vZHOCw';  
   map = new mapboxgl.Map({
   container: 'map',
@@ -72,16 +70,36 @@ function initMap() {
 
   map.on('load', function (e) {
     map.resize();
+
+    if (("pin_lng" in params) && ("pin_lat" in params) && (params["pin_lng"])) {
+        map.addSource('point', {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [Number(params['pin_lng']),Number(params['pin_lat']]
+                    }
+                }]
+            }
+        });
+
+        map.addLayer({
+            "id": "point",
+            "type": "circle",
+            "source": "point",
+            "paint": {
+                "circle-radius": 10,
+                "circle-color": "#3887be"
+            }
+        });
+    }
   });    
+
     
-//    map = new google.maps.Map(document.getElementById('map'), {
-//     center: myCenter,
-//     styles: styleArray,
-//     scrollwheel: false,
-//     zoom: myCenter.zoom,
-//     disableDefaultUI: true,
-// //    minZoom: 13,
-//     zoomControl: false
-// //    maxZoom: 18
-//   });
+
+    
+    
 }
